@@ -18,12 +18,12 @@ nBlock_FlipFlop::nBlock_FlipFlop(uint32_t triggerMode) {
 uint32_t nBlock_FlipFlop::outputAvailable(uint32_t outputNumber) { return _exposed_available[outputNumber]; }
 uint32_t nBlock_FlipFlop::readOutput(uint32_t outputNumber) { return _exposed_output[outputNumber]; }
 
-void nBlock_FlipFlop::triggerInput(uint32_t inputNumber, uint32_t value) { // inputNumber is ignored
+void nBlock_FlipFlop::triggerInput(nBlocks_Message message) { // inputNumber is ignored
     // If value is adequate to the trigger mode, act on output
     if (
             (_triggerMode == triggerMode_Both) ||                        // if triggers on anything, or
-            ((_triggerMode == triggerMode_Positive) && (value != 0)) ||  // triggers on positive values (and is positive), or
-            ((_triggerMode == triggerMode_Zero) && (value == 0))         // triggers on zero values (and is zero)
+            ((_triggerMode == triggerMode_Positive) && (message.intValue != 0)) ||  // triggers on positive values (and is positive), or
+            ((_triggerMode == triggerMode_Zero) && (message.intValue == 0))         // triggers on zero values (and is zero)
     ) {
         // Change output data
         _output[0] = (_output[0]? 0 : 1); // Toggles value

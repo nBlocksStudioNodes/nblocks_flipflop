@@ -22,7 +22,7 @@ public:
     nBlock_FlipFlop(uint32_t triggerMode = triggerMode_Positive);
     uint32_t outputAvailable(uint32_t outputNumber);
     uint32_t readOutput(uint32_t outputNumber);
-    void triggerInput(uint32_t inputNumber, uint32_t value);
+    void triggerInput(nBlocks_Message message);
     void step(void);
 private:
     // Below are variables used internally by this node
